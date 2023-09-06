@@ -19,9 +19,26 @@ import streamlit.components.v1 as components
 
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 subscription_key = st.secrets["VISION_KEY"]
-endpoint = "https://yeyulab-vision.cognitiveservices.azure.com/"
-st.set_page_config(layout="wide")
+endpoint = st.secrets["VISION_EP"]
 
+init_image = "https://i.ibb.co/8rngT2V/webpage.jpg"
+
+def add_bg_from_url():
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background-image: url("https://i.ibb.co/t8R9HdY/abstract-1846962-1280.jpg");
+             background-attachment: fixed;
+             background-size: cover
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
+st.set_page_config(layout="wide")
+add_bg_from_url() 
 
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
@@ -99,10 +116,12 @@ if "image" not in st.session_state:
 st.title("Yeyu's Drawing to web")
 col1, col2 = st.columns([0.5, 0.5], gap='medium')
 with col1:
-    st.text_input("Image URL:", value="", key='img')
+    st.text_input("Image URL:", value=init_image, key='img')
     st.button("Run", on_click=image_run)
     if st.session_state.image != '':
         st.image(st.session_state.image)
+    else:
+        st.image(init_image)
 with col2:
     with st.expander("See source code"):
         st.code(st.session_state.html)
