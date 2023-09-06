@@ -114,7 +114,7 @@ if "html" not in st.session_state:
 if "image" not in st.session_state:
     st.session_state.image = ''
 
-st.title("Yeyu's Drawing to web")
+st.title("Convert Your Drawing To Web Design")
 col1, col2 = st.columns([0.5, 0.5], gap='medium')
 with col1:
     st.text_input("Image URL:", value=init_image, key='img')
