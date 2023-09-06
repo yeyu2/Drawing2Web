@@ -17,13 +17,12 @@ import os
 import streamlit as st
 import streamlit.components.v1 as components
 
-os.environ["OPENAI_API_KEY"] = ""
-os.environ["VISION_KEY"] = ""
-endpoint = os.environ["VISION_ENDPOINT"] = "https://yeyulab-vision.cognitiveservices.azure.com/"
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+subscription_key = st.secrets["VISION_KEY"]
+endpoint = "https://yeyulab-vision.cognitiveservices.azure.com/"
 st.set_page_config(layout="wide")
 
-subscription_key = os.environ["VISION_KEY"]
-endpoint = os.environ["VISION_ENDPOINT"]
+
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
