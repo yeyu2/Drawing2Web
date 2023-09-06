@@ -107,6 +107,7 @@ def image_run():
 
     st.session_state.html = html_code
     st.session_state.image = st.session_state.img
+    st.balloons()
 
 if "html" not in st.session_state:
     st.session_state.html = ""
